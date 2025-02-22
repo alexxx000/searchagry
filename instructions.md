@@ -1,4 +1,4 @@
-# Инициализация репозитория
+Dct# Инициализация репозитория
 git init
 
 # Добавление всех файлов в staging
@@ -17,3 +17,12 @@ git push -u origin main
 git reset --hard <commit-hash>
 или 
 git checkout <commit-hash>
+-------------------------------------------------------------
+# Добавить все изменения
+git add .
+
+# Создать коммит
+git commit -m "Update documentation and add task history"
+
+# Отправить изменения
+git push

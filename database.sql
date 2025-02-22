@@ -5,12 +5,16 @@ USE price_comparison;
 -- Удаляем существующие таблицы (если есть)
 DROP TABLE IF EXISTS prices;
 DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS marketplaces;
 
 -- Создаем таблицы заново
 CREATE TABLE IF NOT EXISTS products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    external_id VARCHAR(100) NULL COMMENT 'ID товара в маркетплейсе',
+    marketplace_id INT NULL COMMENT 'ID маркетплейса',
+    last_update TIMESTAMP NULL COMMENT 'Время последнего обновления'
 );
 
 CREATE TABLE IF NOT EXISTS prices (
@@ -21,6 +25,14 @@ CREATE TABLE IF NOT EXISTS prices (
     url VARCHAR(255),
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+CREATE TABLE IF NOT EXISTS marketplaces (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    code VARCHAR(50) NOT NULL UNIQUE,
+    api_url VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- Добавляем тестовые товары
@@ -80,4 +92,9 @@ INSERT INTO prices (product_id, marketplace, price, url) VALUES
 (7, 'Ozon', 69990.00, 'https://ozon.ru/product/7'),
 (7, 'Wildberries', 68990.00, 'https://wildberries.ru/product/7'),
 (7, 'AliExpress', 67990.00, 'https://aliexpress.ru/product/7'),
-(7, 'Яндекс.Маркет', 70990.00, 'https://market.yandex.ru/product/7'); 
+(7, 'Яндекс.Маркет', 70990.00, 'https://market.yandex.ru/product/7');
+
+-- Добавляем базовые маркетплейсы
+INSERT INTO marketplaces (name, code, api_url) VALUES 
+('Wildberries', 'wb', 'https://card.wb.ru'),
+('OZON', 'ozon', 'https://api-seller.ozon.ru'); 

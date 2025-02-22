@@ -25,6 +25,12 @@ mysql -u root -p < database.sql
 
 4. Запустите веб-сервер и откройте проект в браузере
 
+## Тестирование
+
+Для тестирования парсеров используйте:
+- http://sale/test/test_wb_parser.php - тест парсера Wildberries
+- http://sale/test/info.php - информация о PHP
+
 ## Технологии
 
 - PHP 8.0
