@@ -1,0 +1,17 @@
+# IDE и системные файлы
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Конфигурационные файлы
+includes/config.php
+
+# Временные файлы
+*.log
+*.cache
+tmp/
+
+# Зависимости и vendor папки
+vendor/
+node_modules/ 

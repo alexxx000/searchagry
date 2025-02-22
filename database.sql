@@ -1,0 +1,18 @@
+CREATE DATABASE IF NOT EXISTS price_comparison;
+USE price_comparison;
+
+CREATE TABLE IF NOT EXISTS products (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS prices (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    product_id INT,
+    marketplace VARCHAR(100) NOT NULL,
+    price DECIMAL(10,2) NOT NULL,
+    url VARCHAR(255),
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (product_id) REFERENCES products(id)
+); 
