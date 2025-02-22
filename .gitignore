@@ -1,17 +1,28 @@
-# IDE и системные файлы
+# IDE files
 .idea/
 .vscode/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
 .DS_Store
 Thumbs.db
 
-# Конфигурационные файлы
-includes/config.php
-
-# Временные файлы
+# Logs
 *.log
-*.cache
-tmp/
+logs/
 
-# Зависимости и vendor папки
-vendor/
-node_modules/ 
+# Configuration
+includes/config.local.php
+
+# Composer
+/vendor/
+composer.lock
+
+# Node.js
+/node_modules/
+package-lock.json
+
+# Environment variables
+.env
+.env.local 

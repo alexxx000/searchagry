@@ -1,0 +1,35 @@
+Options +FollowSymLinks
+AddDefaultCharset UTF-8
+
+<IfModule mod_mime.c>
+    AddType text/css .css
+    AddType application/javascript .js
+</IfModule>
+
+<IfModule mod_headers.c>
+    Header set Access-Control-Allow-Origin "*"
+    Header set X-Content-Type-Options ""
+    Header set Content-Type "text/css" env=CSS
+    Header set Content-Type "application/javascript" env=JS
+</IfModule>
+
+<FilesMatch "\.(css)$">
+    SetEnv CSS 1
+</FilesMatch>
+
+<FilesMatch "\.(js)$">
+    SetEnv JS 1
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /sale
+    
+    # Если файл или директория существуют, используем их напрямую
+    RewriteCond %{REQUEST_FILENAME} -f [OR]
+    RewriteCond %{REQUEST_FILENAME} -d
+    RewriteRule ^ - [L]
+
+    # Перенаправляем все остальные запросы на index.php
+    RewriteRule ^ index.php [L]
+</IfModule> 
